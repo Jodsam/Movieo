@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_menu"
         style="@style/BottomNavStyle"
-        app:itemTextColor="#E38800"
+        app:itemTextColor="@color/mainOrange"
         app:labelVisibilityMode="labeled" />
 
     <com.google.android.material.tabs.TabLayout
@@ -34,12 +34,12 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Releases" />
+            />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Recommended" />
+            />
 
 
     </com.google.android.material.tabs.TabLayout>
@@ -49,9 +49,11 @@
         android:layout_width="0dp"
         android:layout_height="36dp"
         android:background="@color/material_dynamic_neutral30"
+        android:fontFamily="@font/open_sans_semibold"
         android:gravity="center"
-        android:text="FEATURED TODAY"
-        android:textColor="#E38800"
+        android:text="@string/featured_today"
+        android:textColor="@color/mainOrange"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -81,7 +83,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:text="title"
+        android:fontFamily="@font/open_sans_semibold"
+        android:text="@string/movie_title"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/main_poster"
         app:layout_constraintTop_toBottomOf="@+id/main_featured" />
@@ -92,7 +96,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:text="plot"
+        android:fontFamily="@font/roboto"
+        android:text="@string/plot"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/main_poster"
         app:layout_constraintTop_toBottomOf="@+id/main_title" />
@@ -103,7 +109,9 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
-        android:text="date"
+        android:fontFamily="@font/roboto"
+        android:text="@string/release_date"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="@+id/main_poster"
         app:layout_constraintEnd_toEndOf="parent" />
 

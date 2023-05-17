@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.tonyk.android.movieo.databinding.MainPageMovieItemBinding
-import com.tonyk.android.movieo.databinding.MovieItemBinding
 import com.tonyk.android.movieo.model.MovieDetailItem
 
 class MainListViewHolder(private val binding: MainPageMovieItemBinding) :

@@ -25,6 +25,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
+        android:fontFamily="@font/open_sans_semibold"
         android:gravity="center"
         android:text="title"
         android:textAppearance="@style/TextAppearance.AppCompat.Display3"

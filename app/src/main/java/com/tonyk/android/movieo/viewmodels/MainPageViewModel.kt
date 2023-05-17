@@ -7,7 +7,6 @@ import com.tonyk.android.movieo.model.MovieDetailItem
 import com.tonyk.android.movieo.repositories.FirebaseRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -41,19 +40,16 @@ class MainPageViewModel : ViewModel() {
             }
         }
     }
-
     fun loadNewMovies() {
         viewModelScope.launch {
             val imdbIds = firebaseRepository.getNewMoviesFromFirebase()
 
             imdbIds.collectLatest { ids ->
                 val movieList = mutableListOf<MovieDetailItem>()
-
                 ids.forEach { imdbId ->
                     val movie = movieApiRepository.searchDetails(imdbId)
                     movieList.add(movie)
                 }
-
                 _newmovies.value = movieList.toList()
             }
         }
