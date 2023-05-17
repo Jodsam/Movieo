@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1094677475889",
+    "firebase_url": "https://movieo-e3212-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "movieo-e3212",
+    "storage_bucket": "movieo-e3212.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1094677475889:android:0febeaf08c58d237441b10",
+        "android_client_info": {
+          "package_name": "com.tonyk.android.movieo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1094677475889-d5jja6euhjs1m7vqoafr15okfih7f2j4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRR0j699TXD5Zbk2QjCGrDmkAGoszcs60"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1094677475889-d5jja6euhjs1m7vqoafr15okfih7f2j4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

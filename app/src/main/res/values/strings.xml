@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">Movieo</string>
+
+    <string name="search">Search</string>
+    <string name="clear_search">Clear Search</string>
+
+
+
+    <string name="movie_title">Movie Title</string>
+
+
+    <string name="plot">Plot: %s</string>
+
+
+    <string name="country">Country: %s</string>
+
+
+    <string name="release_date">Release Date: %s</string>
+
+    <string name="genre">Genre: %s</string>
+
+    <string name="director">Director: %s</string>
+
+    <string name="runtime">Runtime: %s</string>
+
+
+    <string name="language">Language: %s</string>
+
+    <string name="your_rating">Your Rating: %s</string>
+
+    <string name="ratings">IMDB: %s</string>
+
+    <string name="actors_with_label">Actors: %s</string>
+
+    <string name="share_movie">https://www.imdb.com/title/%s</string>
+
+
+</resources>
