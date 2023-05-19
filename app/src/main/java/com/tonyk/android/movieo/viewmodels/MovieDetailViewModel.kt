@@ -35,7 +35,7 @@ class MovieDetailViewModel(imdbID: String): ViewModel() {
 
     init {
         viewModelScope.launch{
-                _movieDetails.value = movieRepository.searchDetails(imdbID)
+                _movieDetails.value = movieRepository.searchDetails(imdbID)!!
                 isDataLoaded = true
             }
     }

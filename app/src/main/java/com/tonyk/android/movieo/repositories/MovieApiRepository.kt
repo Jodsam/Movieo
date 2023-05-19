@@ -14,8 +14,6 @@ class MovieApiRepository {
     private val apiKey = "17a5d486"
 
     init {
-
-
         val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl("https://www.omdbapi.com/")
             .addConverterFactory(MoshiConverterFactory.create())
@@ -32,8 +30,13 @@ class MovieApiRepository {
         }
     }
 
-    suspend fun searchDetails(imdbID: String): MovieDetailItem {
-      return  movieApi.searchDetails(apiKey, imdbID)
+    suspend fun searchDetails(imdbID: String): MovieDetailItem? {
+        return try {
+            movieApi.searchDetails(apiKey, imdbID)
+        } catch (e: Exception) {
+            Log.e("MovieApiRepository", "Error fetching movie details: ${e.message}")
+            null
+        }
     }
 
 }

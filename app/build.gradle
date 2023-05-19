@@ -88,4 +88,7 @@ dependencies {
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
     implementation 'androidx.core:core-splashscreen:1.0.1'
 
+    implementation 'com.google.firebase:firebase-messaging:23.1.2'
+
+
 }

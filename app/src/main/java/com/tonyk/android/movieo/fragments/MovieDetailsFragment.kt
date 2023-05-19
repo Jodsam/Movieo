@@ -92,7 +92,6 @@ class MovieDetailsFragment : Fragment() {
                             }
                             setButtonState()
                         }
-
                     }
                 }
             }
@@ -112,7 +111,6 @@ class MovieDetailsFragment : Fragment() {
                      }
                 }
         }
-
         binding.saveShit.setOnClickListener {
             if (movieDetailViewModel.isDataLoaded) {
                 viewLifecycleOwner.lifecycleScope.launch {
@@ -127,7 +125,6 @@ class MovieDetailsFragment : Fragment() {
 
             putExtra(Intent.EXTRA_TEXT,
                 getString(R.string.share_movie,args.movieID)  )
-
         }
             startActivity(shareIntent) }
 

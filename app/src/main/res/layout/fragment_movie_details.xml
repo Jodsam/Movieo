@@ -15,7 +15,7 @@
         android:padding="4dp"
         android:text="@string/movie_title"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-        android:textColor="@color/material_dynamic_neutral90"
+        android:textColor="@color/material_dynamic_neutral30"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/scrollView3"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,7 +25,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="0dp"
-
         android:layout_height="50dp"
         app:layout_anchorGravity="center"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -89,6 +89,13 @@ class SearchFragment : Fragment()  {
             }
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        binding.logoImage.visibility = View.GONE
+        binding.sloganText.visibility = View.GONE
+        binding.withText.visibility = View.GONE
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

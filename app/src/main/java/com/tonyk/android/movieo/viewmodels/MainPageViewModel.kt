@@ -33,7 +33,9 @@ class MainPageViewModel : ViewModel() {
 
                 ids.forEach { imdbId ->
                     val movie = movieApiRepository.searchDetails(imdbId)
-                    movieList.add(movie)
+                    if (movie != null) {
+                        movieList.add(movie)
+                    }
                 }
 
                 _movies.value = movieList.toList()
@@ -48,7 +50,9 @@ class MainPageViewModel : ViewModel() {
                 val movieList = mutableListOf<MovieDetailItem>()
                 ids.forEach { imdbId ->
                     val movie = movieApiRepository.searchDetails(imdbId)
-                    movieList.add(movie)
+                    if (movie != null) {
+                        movieList.add(movie)
+                    }
                 }
                 _newmovies.value = movieList.toList()
             }
