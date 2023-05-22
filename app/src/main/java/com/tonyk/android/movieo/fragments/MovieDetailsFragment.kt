@@ -1,16 +1,13 @@
 package com.tonyk.android.movieo.fragments
 
-
-
-
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
@@ -27,11 +24,8 @@ import com.tonyk.android.movieo.viewmodels.MovieDetailViewModelFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.HttpException
-
 
 class MovieDetailsFragment : Fragment() {
-
 
     private var _binding: FragmentMovieDetailsBinding? = null
     private val binding
@@ -54,14 +48,9 @@ class MovieDetailsFragment : Fragment() {
         return binding.root
     }
 
-
-
-
+    @SuppressLint("ResourceAsColor")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-
 
         setFragmentResultListener(RatingDialogFragment.REQUEST_RATING) { _, bundle ->
             val myratings = bundle.getFloat("rating")
@@ -101,13 +90,8 @@ class MovieDetailsFragment : Fragment() {
                                 binding.ocenka.text =
                                     getString(R.string.your_rating, movieDetailViewModel.myratings)
                             }
-
-                            binding.saveShit.load(if (movieDetailViewModel.isAddedToWatchLists) R.drawable.ic_checked else R.drawable.movie_bookmark)
-                            binding.sawButton.load(if (movieDetailViewModel.alreadySaw) R.drawable.ic_watched else R.drawable.ic_saw)
-
-
+                            setButtonState()
                         }
-
                     }
                 }
             }
@@ -115,43 +99,49 @@ class MovieDetailsFragment : Fragment() {
             findNavController().navigate(MovieDetailsFragmentDirections.checkPoster(movieDetailViewModel.movieDetails.value.Poster))
         }
 
-
         binding.rateShit.setOnClickListener {
             findNavController().navigate(MovieDetailsFragmentDirections.rateMovie()) }
-
 
         binding.sawButton.setOnClickListener {
                 if (movieDetailViewModel.isDataLoaded) {
                 viewLifecycleOwner.lifecycleScope.launch {
                     movieDetailViewModel.addMovie(args.movieID, false, true)
-                    binding.sawButton.load(if (movieDetailViewModel.alreadySaw) R.drawable.ic_watched else R.drawable.ic_saw)
-                    binding.saveShit.load(if (movieDetailViewModel.isAddedToWatchLists) R.drawable.ic_checked else R.drawable.movie_bookmark) }
+                    setButtonState()
+                    Toast.makeText(context, if (movieDetailViewModel.alreadySaw) "Marked As Watched" else "Marked As Not Watched", Toast.LENGTH_SHORT).show()
+                     }
                 }
         }
-
         binding.saveShit.setOnClickListener {
             if (movieDetailViewModel.isDataLoaded) {
                 viewLifecycleOwner.lifecycleScope.launch {
                     movieDetailViewModel.addMovie(args.movieID, true, false)
-                    binding.saveShit.load(if (movieDetailViewModel.isAddedToWatchLists) R.drawable.ic_checked else R.drawable.movie_bookmark)
-                    binding.sawButton.load(if (movieDetailViewModel.alreadySaw) R.drawable.ic_watched else R.drawable.ic_saw) }
+                    setButtonState()
+                    Toast.makeText(context, if (movieDetailViewModel.isAddedToWatchLists) "Added To WatchList" else "Removed From WatchList", Toast.LENGTH_SHORT).show()
+                    }
                 }
-
         }
         binding.movieShare.setOnClickListener { val shareIntent = Intent(Intent.ACTION_SEND).apply {
             type = "text/plain"
 
             putExtra(Intent.EXTRA_TEXT,
                 getString(R.string.share_movie,args.movieID)  )
-
         }
             startActivity(shareIntent) }
-
-
 
     }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+    private fun setButtonState() {
+        val context = requireContext()
+
+        val sawButtonTextRes = if (movieDetailViewModel.alreadySaw) R.string.watched_mark else R.string.not_watched_mark
+        binding.sawButton.setText(sawButtonTextRes)
+        binding.sawButton.setTextColor(ContextCompat.getColor(context, if (movieDetailViewModel.alreadySaw) R.color.green else R.color.yellow))
+
+        val saveButtonTextRes = if (movieDetailViewModel.isAddedToWatchLists) R.string.added_to_watchlist else R.string.add_watchlist
+        binding.saveShit.setText(saveButtonTextRes)
+        binding.saveShit.setTextColor(ContextCompat.getColor(context, if (movieDetailViewModel.isAddedToWatchLists) R.color.green else R.color.yellow))
     }
 }

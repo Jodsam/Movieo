@@ -4,30 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TableLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import coil.load
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.google.android.material.tabs.TabLayoutMediator
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import com.tonyk.android.movieo.R
-import com.tonyk.android.movieo.adapters.MainListAdapter
 import com.tonyk.android.movieo.adapters.VpAdapter
-
 import com.tonyk.android.movieo.databinding.FragmentMainPageBinding
 import com.tonyk.android.movieo.viewmodels.MainPageViewModel
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 
@@ -54,6 +43,9 @@ class MainPageFragment : Fragment()  {
 
 
         return binding.root }
+
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

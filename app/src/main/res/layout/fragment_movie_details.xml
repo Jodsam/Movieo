@@ -15,7 +15,7 @@
         android:padding="4dp"
         android:text="@string/movie_title"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-        android:textColor="@color/material_dynamic_neutral90"
+        android:textColor="@color/material_dynamic_neutral30"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/scrollView3"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,7 +25,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="0dp"
-
         android:layout_height="50dp"
         app:layout_anchorGravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -33,40 +32,33 @@
         app:layout_constraintStart_toStartOf="parent">
 
 
-        <ImageButton
+        <Button
             android:id="@+id/saw_button"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:backgroundTint="#2E3133"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@color/material_dynamic_neutral30"
+            android:text="@string/not_watched_mark"
+            android:textColor="@color/yellow"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/save_shit"
-            app:layout_constraintStart_toEndOf="@+id/rate_shit"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_saw" />
-
-        <ImageButton
-            android:id="@+id/rate_shit"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-
-            android:backgroundTint="#2E3133"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/saw_button"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/movie_rate" />
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
+        <Button
             android:id="@+id/save_shit"
             android:layout_width="0dp"
             android:layout_height="0dp"
-
-            android:backgroundTint="#2E3133"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@color/material_dynamic_neutral30"
+            android:text="@string/add_watchlist"
+            android:textColor="#FEC617"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/saw_button"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/movie_bookmark" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -226,11 +218,22 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
-                android:backgroundTint="#000000"
+                android:backgroundTint="@color/material_dynamic_neutral30"
                 android:text="share"
                 app:layout_constraintBottom_toBottomOf="@+id/movie_photo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:srcCompat="@drawable/ic_share" />
+
+            <ImageButton
+                android:id="@+id/rate_shit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:backgroundTint="@color/material_dynamic_neutral30"
+                app:layout_constraintBottom_toTopOf="@+id/genre"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/rating"
+                app:srcCompat="@drawable/movie_rate" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,7 +17,6 @@ class MyListViewModel : ViewModel() {
     val movies: StateFlow<List<Movie>>
         get() = _movies.asStateFlow()
 
-
     init {
         viewModelScope.launch {
             movieDatabaseRepository.getMovies().collect {

@@ -4,6 +4,12 @@
     <color name="white">#FFFFFFFF</color>
     <color name="yellowish">#FFEB3B</color>
     <color name="colorPrimary">#FF5722</color>
+    <color name="mainOrange">#E38800</color>
+    <color name="yellow">#FEC71A</color>
+    <color name="green">#FF78DD20</color>
+
+    <color name="material_dynamic_neutral30">#FF454749</color>
+
 
 
 </resources>

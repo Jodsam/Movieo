@@ -26,6 +26,7 @@ class MovieSearchViewHolder(private val binding: MovieItemBinding) :
             val action = SearchFragmentDirections.searchFragmentToDetailsFragment(movieListItem.imdbId)
             navController.navigate(action)
         }
+
     }
 }
 
@@ -41,6 +42,7 @@ class MovieSearchAdapter(private val navController: NavController) :
     override fun onBindViewHolder(holder: MovieSearchViewHolder, position: Int) {
         val item = getItem(position)
         holder.bind(item, navController)
+
     }
 }
 

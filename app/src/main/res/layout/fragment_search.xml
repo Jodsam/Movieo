@@ -4,15 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/search_fragment_background"
->
+    android:background="@drawable/my_gradient_four">
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
-
+        android:focusable="auto"
         app:layout_constraintBottom_toTopOf="@+id/progressBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -21,24 +20,68 @@
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_view"
+        style="@style/CustomSearchViewStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:iconifiedByDefault="false"
-        android:alpha="0.6"
-        android:background="@drawable/my_gradient"
+        android:background="@color/material_dynamic_neutral30"
+        app:searchIcon="@drawable/ic_search"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:iconifiedByDefault="false"
         app:layout_constraintBottom_toTopOf="@+id/search_list"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+          />
 
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:indeterminateTint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/logo_image"
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="220dp"
+        android:layout_marginEnd="8dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/search_list"
+        app:srcCompat="@drawable/logosito" />
+
+    <TextView
+        android:id="@+id/slogan_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:fontFamily="@font/montserrat_alternates_medium_italic"
+        android:text="DISCOVER, WATCH AND SHARE"
+        android:textColor="#FAA220"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/logo_image" />
+
+    <TextView
+        android:id="@+id/with_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/montserrat_alternates_medium_italic"
+        android:text="WITH"
+        android:textColor="#FAA220"
+        app:layout_constraintEnd_toEndOf="@+id/slogan_text"
+        app:layout_constraintStart_toStartOf="@+id/slogan_text"
+        app:layout_constraintTop_toBottomOf="@+id/slogan_text" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,8 +12,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.tonyk.android.movieo.adapters.MainListAdapter
-import com.tonyk.android.movieo.databinding.FragmentMainPageBinding
-import com.tonyk.android.movieo.databinding.FragmentNewMoviesBinding
 import com.tonyk.android.movieo.databinding.FragmentRecommendedBinding
 import com.tonyk.android.movieo.viewmodels.MainPageViewModel
 import kotlinx.coroutines.flow.collectLatest

@@ -4,13 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/my_border">
+    android:background="@drawable/custom_background_list">
 
     <ImageView
         android:id="@+id/rec_image"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:background="@drawable/my_border"
         android:padding="4dp"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -23,9 +22,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="name"
+        android:fontFamily="@font/open_sans_semibold"
+        android:text="@string/movie_title"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/rec_image"
         app:layout_constraintTop_toTopOf="parent" />
@@ -36,7 +37,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Servings"
+        android:fontFamily="@font/roboto"
+        android:text="@string/release_date"
+        android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@+id/rec_image"
         app:layout_constraintTop_toBottomOf="@+id/movie_title" />
 
@@ -45,6 +48,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
+        android:fontFamily="@font/roboto"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/movie_year" />
 </androidx.constraintlayout.widget.ConstraintLayout>
