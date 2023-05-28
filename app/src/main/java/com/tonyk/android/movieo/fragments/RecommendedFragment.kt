@@ -14,15 +14,15 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.tonyk.android.movieo.adapters.MainListAdapter
 import com.tonyk.android.movieo.databinding.FragmentRecommendedBinding
 import com.tonyk.android.movieo.viewmodels.MainPageViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+
+@AndroidEntryPoint
 class RecommendedFragment: Fragment()  {
 
     private val mainpageViewModel: MainPageViewModel by viewModels()
-
-
-
     private var _binding: FragmentRecommendedBinding? = null
     private val binding
         get () = checkNotNull(_binding) {
@@ -61,7 +61,6 @@ class RecommendedFragment: Fragment()  {
                 }
             }
         }
-
     }
 
 

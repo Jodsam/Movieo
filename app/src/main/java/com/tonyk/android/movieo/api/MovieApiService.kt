@@ -20,3 +20,4 @@ interface MovieApiService {
     @Query("i") imdbID: String
     ) : MovieDetailItem
 }
+

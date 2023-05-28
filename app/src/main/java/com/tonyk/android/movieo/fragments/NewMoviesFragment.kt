@@ -14,8 +14,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.tonyk.android.movieo.adapters.MainListAdapter
 import com.tonyk.android.movieo.databinding.FragmentNewMoviesBinding
 import com.tonyk.android.movieo.viewmodels.MainPageViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class NewMoviesFragment: Fragment()  {
 
     private val mainpageViewModel: MainPageViewModel by viewModels()

@@ -20,9 +20,11 @@ import com.tonyk.android.movieo.R
 import com.tonyk.android.movieo.viewmodels.SearchViewModel
 import com.tonyk.android.movieo.adapters.MovieSearchAdapter
 import com.tonyk.android.movieo.databinding.FragmentSearchBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 
+@AndroidEntryPoint
 class SearchFragment : Fragment()  {
     private var _binding: FragmentSearchBinding? = null
     private val binding
