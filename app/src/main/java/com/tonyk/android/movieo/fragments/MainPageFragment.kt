@@ -17,15 +17,14 @@ import com.tonyk.android.movieo.R
 import com.tonyk.android.movieo.adapters.VpAdapter
 import com.tonyk.android.movieo.databinding.FragmentMainPageBinding
 import com.tonyk.android.movieo.viewmodels.MainPageViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-
+@AndroidEntryPoint
 class MainPageFragment : Fragment()  {
 
 
     private val mainpageViewModel: MainPageViewModel by viewModels()
-
-
 
     private var _binding: FragmentMainPageBinding? = null
     private val binding
@@ -43,7 +42,6 @@ class MainPageFragment : Fragment()  {
 
 
         return binding.root }
-
 
 
 

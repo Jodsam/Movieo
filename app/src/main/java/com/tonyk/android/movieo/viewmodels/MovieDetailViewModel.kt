@@ -1,27 +1,27 @@
 package com.tonyk.android.movieo.viewmodels
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.tonyk.android.movieo.repositories.MovieApiRepository
 import com.tonyk.android.movieo.database.MovieDatabaseRepository
 import com.tonyk.android.movieo.model.Movie
 import com.tonyk.android.movieo.model.MovieDetailItem
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MovieDetailViewModel(imdbID: String): ViewModel() {
-    private val movieRepository = MovieApiRepository()
-    private val movieDB = MovieDatabaseRepository.get()
+@HiltViewModel
+class MovieDetailViewModel @Inject constructor(private val movieApiRepository: MovieApiRepository, state: SavedStateHandle, private val movieDB: MovieDatabaseRepository): ViewModel() {
+
     var myratings = "N/A"
-
     var isAddedToWatchLists = false
     var alreadySaw = false
-
     var isDataLoaded = false
-
+    val imdbID = state.get<String>("movieID")
 
     private val _movieDetails: MutableStateFlow<MovieDetailItem> =
         MutableStateFlow<MovieDetailItem>(
@@ -35,12 +35,12 @@ class MovieDetailViewModel(imdbID: String): ViewModel() {
 
     init {
         viewModelScope.launch{
-                _movieDetails.value = movieRepository.searchDetails(imdbID)!!
+                _movieDetails.value = imdbID?.let { movieApiRepository.searchDetails(it) }!!
                 isDataLoaded = true
             }
     }
     suspend fun addMovie(imdbID: String, isAddedToWatchList: Boolean, isWatched: Boolean) {
-        val movie = movieDB.getMovie(imdbID)
+        val movie = movieDB.getMovie(imdbID) ?: null
 
         if (movie == null) {
             val newMovie = Movie(
@@ -67,7 +67,6 @@ class MovieDetailViewModel(imdbID: String): ViewModel() {
                 movie.isWatched = alreadySaw
                 movieDB.updateMovie(movie) }
 
-
                                      }
     }
 
@@ -90,18 +89,8 @@ class MovieDetailViewModel(imdbID: String): ViewModel() {
     private suspend fun deleteMovie(movie: Movie){
         movieDB.deleteMovie(movie)
     }
-
-
-
-
 }
 
 
 
-    class MovieDetailViewModelFactory(
-        private val imdbID: String
-    ) : ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return MovieDetailViewModel(imdbID) as T
-        }
-    }
+

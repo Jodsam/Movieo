@@ -8,10 +8,11 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
+import javax.inject.Inject
 
 class FirebaseRepository {
-    private val database = Firebase.database.reference
 
+    private val database = Firebase.database.reference
     fun getMoviesFromFirebase(): Flow<List<String>> = callbackFlow {
         val listener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {

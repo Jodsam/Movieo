@@ -14,9 +14,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.tonyk.android.movieo.adapters.WatchListAdapter
 import com.tonyk.android.movieo.databinding.FragmentWatchedListBinding
 import com.tonyk.android.movieo.viewmodels.MyListViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 
+@AndroidEntryPoint
 class WatchedListFragment: Fragment() {
     private val myListViewModel: MyListViewModel by viewModels()
     private var _binding: FragmentWatchedListBinding? = null

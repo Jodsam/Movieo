@@ -5,15 +5,17 @@ import androidx.lifecycle.viewModelScope
 import com.tonyk.android.movieo.repositories.MovieApiRepository
 import com.tonyk.android.movieo.model.MovieDetailItem
 import com.tonyk.android.movieo.repositories.FirebaseRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
-class MainPageViewModel : ViewModel() {
-    private val firebaseRepository = FirebaseRepository()
-    private val movieApiRepository = MovieApiRepository()
+@HiltViewModel
+class MainPageViewModel @Inject constructor(private val movieApiRepository: MovieApiRepository, private val firebaseRepository: FirebaseRepository)  : ViewModel() {
+
 
     private val _movies: MutableStateFlow<List<MovieDetailItem>> = MutableStateFlow(emptyList())
     val movies: StateFlow<List<MovieDetailItem>> = _movies

@@ -1,24 +1,11 @@
 package com.tonyk.android.movieo.database
 
-import android.content.Context
-import androidx.room.Room
 import com.tonyk.android.movieo.model.Movie
 import kotlinx.coroutines.flow.Flow
-
-private const val DATABASE_NAME = "movie-database"
-
-class MovieDatabaseRepository private constructor(context: Context
-) {
+import javax.inject.Inject
 
 
-    private val database: MovieDatabase = Room
-        .databaseBuilder(
-            context.applicationContext,
-            MovieDatabase::class.java,
-            DATABASE_NAME
-        )
-        .addMigrations(migration_1_2)
-        .build()
+class MovieDatabaseRepository @Inject constructor(private val database: MovieDatabase) {
 
 
     fun getMovies(): Flow<List<Movie>> = database.movieDao().getMovies()
@@ -37,17 +24,4 @@ class MovieDatabaseRepository private constructor(context: Context
         database.movieDao().deleteMovie(movie)
     }
 
-
-    companion object {
-        private var INSTANCE: MovieDatabaseRepository? = null
-        fun initialize(context: Context) {
-            if (INSTANCE == null) {
-                INSTANCE = MovieDatabaseRepository(context)
-            }
-        }
-        fun get(): MovieDatabaseRepository {
-            return INSTANCE ?:
-            throw IllegalStateException("MovieRepositoryDB must be initialized")
-        }
-    }
 }

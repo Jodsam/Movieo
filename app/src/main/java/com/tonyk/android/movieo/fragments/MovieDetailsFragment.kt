@@ -20,11 +20,14 @@ import coil.load
 import com.tonyk.android.movieo.R
 import com.tonyk.android.movieo.databinding.FragmentMovieDetailsBinding
 import com.tonyk.android.movieo.viewmodels.MovieDetailViewModel
-import com.tonyk.android.movieo.viewmodels.MovieDetailViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
+
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+
+@AndroidEntryPoint
 class MovieDetailsFragment : Fragment() {
 
     private var _binding: FragmentMovieDetailsBinding? = null
@@ -34,9 +37,8 @@ class MovieDetailsFragment : Fragment() {
         }
 
     private val args: MovieDetailsFragmentArgs by navArgs()
-    private val movieDetailViewModel: MovieDetailViewModel by viewModels() {
-        MovieDetailViewModelFactory(args.movieID)
-    }
+    private val movieDetailViewModel: MovieDetailViewModel by viewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,8 +59,8 @@ class MovieDetailsFragment : Fragment() {
             movieDetailViewModel.myratings = (myratings*2).toString()
             viewLifecycleOwner.lifecycleScope.launch {
             movieDetailViewModel.updateMovieRating(args.movieID, myratings) }
-            binding.ocenka.visibility = View.VISIBLE
-            binding.ocenka.text = getString(R.string.your_rating, movieDetailViewModel.myratings)
+            binding.showRatings.visibility = View.VISIBLE
+            binding.showRatings.text = getString(R.string.your_rating, movieDetailViewModel.myratings)
         }
 
             viewLifecycleOwner.lifecycleScope.launch {
@@ -68,10 +70,10 @@ class MovieDetailsFragment : Fragment() {
                         withContext(Dispatchers.Main) {
 
                             binding.movieTitleD.text = it.title
-                            if (it.Poster.length == 3) binding.moviePhoto.load(R.drawable.noposter)
-                            else binding.moviePhoto.load(it.Poster)
+                            if (it.Poster.length == 3) binding.moviePoster.load(R.drawable.noposter)
+                            else binding.moviePoster.load(it.Poster)
                             binding.plot.text = getString(R.string.plot, it.plot)
-                            binding.counry.text = getString(R.string.country, it.Country)
+                            binding.country.text = getString(R.string.country, it.Country)
                             binding.language.text = getString(R.string.language, it.Language)
                             binding.date.text = getString(R.string.release_date, it.date)
                             binding.time.text = getString(R.string.runtime, it.runtime)
@@ -86,8 +88,8 @@ class MovieDetailsFragment : Fragment() {
                             binding.director.text = getString(R.string.director, it.Director)
 
                             if (movieDetailViewModel.myratings != "N/A") {
-                                binding.ocenka.visibility = View.VISIBLE
-                                binding.ocenka.text =
+                                binding.showRatings.visibility = View.VISIBLE
+                                binding.showRatings.text =
                                     getString(R.string.your_rating, movieDetailViewModel.myratings)
                             }
                             setButtonState()
@@ -95,14 +97,14 @@ class MovieDetailsFragment : Fragment() {
                     }
                 }
             }
-        binding.moviePhoto.setOnClickListener {
+        binding.moviePoster.setOnClickListener {
             findNavController().navigate(MovieDetailsFragmentDirections.checkPoster(movieDetailViewModel.movieDetails.value.Poster))
         }
 
-        binding.rateShit.setOnClickListener {
+        binding.rateMovieButton.setOnClickListener {
             findNavController().navigate(MovieDetailsFragmentDirections.rateMovie()) }
 
-        binding.sawButton.setOnClickListener {
+        binding.sawMovieButton.setOnClickListener {
                 if (movieDetailViewModel.isDataLoaded) {
                 viewLifecycleOwner.lifecycleScope.launch {
                     movieDetailViewModel.addMovie(args.movieID, false, true)
@@ -111,7 +113,7 @@ class MovieDetailsFragment : Fragment() {
                      }
                 }
         }
-        binding.saveShit.setOnClickListener {
+        binding.saveMovieButton.setOnClickListener {
             if (movieDetailViewModel.isDataLoaded) {
                 viewLifecycleOwner.lifecycleScope.launch {
                     movieDetailViewModel.addMovie(args.movieID, true, false)
@@ -120,7 +122,7 @@ class MovieDetailsFragment : Fragment() {
                     }
                 }
         }
-        binding.movieShare.setOnClickListener { val shareIntent = Intent(Intent.ACTION_SEND).apply {
+        binding.movieShareButton.setOnClickListener { val shareIntent = Intent(Intent.ACTION_SEND).apply {
             type = "text/plain"
 
             putExtra(Intent.EXTRA_TEXT,
@@ -137,11 +139,11 @@ class MovieDetailsFragment : Fragment() {
         val context = requireContext()
 
         val sawButtonTextRes = if (movieDetailViewModel.alreadySaw) R.string.watched_mark else R.string.not_watched_mark
-        binding.sawButton.setText(sawButtonTextRes)
-        binding.sawButton.setTextColor(ContextCompat.getColor(context, if (movieDetailViewModel.alreadySaw) R.color.green else R.color.yellow))
+        binding.sawMovieButton.setText(sawButtonTextRes)
+        binding.sawMovieButton.setTextColor(ContextCompat.getColor(context, if (movieDetailViewModel.alreadySaw) R.color.green else R.color.yellow))
 
         val saveButtonTextRes = if (movieDetailViewModel.isAddedToWatchLists) R.string.added_to_watchlist else R.string.add_watchlist
-        binding.saveShit.setText(saveButtonTextRes)
-        binding.saveShit.setTextColor(ContextCompat.getColor(context, if (movieDetailViewModel.isAddedToWatchLists) R.color.green else R.color.yellow))
+        binding.saveMovieButton.setText(saveButtonTextRes)
+        binding.saveMovieButton.setTextColor(ContextCompat.getColor(context, if (movieDetailViewModel.isAddedToWatchLists) R.color.green else R.color.yellow))
     }
 }
