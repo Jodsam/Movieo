@@ -1,12 +1,12 @@
 package com.tonyk.android.movieo.api
 
-import com.tonyk.android.movieo.model.MovieDetailItem
+import com.tonyk.android.movieo.model.MovieDetailsItem
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 
 
-interface MovieApiService {
+interface MovieApi {
     @GET("/")
     suspend fun searchMovies(
         @Query("apikey") apiKey: String,
@@ -18,6 +18,7 @@ interface MovieApiService {
     suspend fun searchDetails(
     @Query("apikey") apiKey: String,
     @Query("i") imdbID: String
-    ) : MovieDetailItem
+    ) : MovieDetailsItem
+
 }
 

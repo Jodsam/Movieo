@@ -44,44 +44,5 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
-        android:id="@+id/logo_image"
-        android:layout_width="0dp"
-        android:layout_height="300dp"
-        android:layout_marginTop="220dp"
-        android:layout_marginEnd="8dp"
-        android:scaleType="fitCenter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/search_list"
-        app:srcCompat="@drawable/logosito" />
-
-    <TextView
-        android:id="@+id/slogan_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
-        android:fontFamily="@font/montserrat_alternates_medium_italic"
-        android:text="DISCOVER, WATCH AND SHARE"
-        android:textColor="#FAA220"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/logo_image" />
-
-    <TextView
-        android:id="@+id/with_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/montserrat_alternates_medium_italic"
-        android:text="WITH"
-        android:textColor="#FAA220"
-        app:layout_constraintEnd_toEndOf="@+id/slogan_text"
-        app:layout_constraintStart_toStartOf="@+id/slogan_text"
-        app:layout_constraintTop_toBottomOf="@+id/slogan_text" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

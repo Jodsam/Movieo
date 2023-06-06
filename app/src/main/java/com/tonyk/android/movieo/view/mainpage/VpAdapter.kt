@@ -1,11 +1,11 @@
-package com.tonyk.android.movieo.adapters
+package com.tonyk.android.movieo.view.mainpage
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.tonyk.android.movieo.fragments.NewMoviesFragment
-import com.tonyk.android.movieo.fragments.RecommendedFragment
+import com.tonyk.android.movieo.view.mainpage.NewMoviesFragment
+import com.tonyk.android.movieo.view.mainpage.RecommendedFragment
 
 class VpAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fragmentManager, lifecycle) {

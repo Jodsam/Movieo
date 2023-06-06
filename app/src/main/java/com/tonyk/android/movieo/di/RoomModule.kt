@@ -1,10 +1,10 @@
 package com.tonyk.android.movieo.di
 
-import android.app.Application
 import android.content.Context
 import androidx.room.Room
 import com.tonyk.android.movieo.database.MovieDatabase
 import com.tonyk.android.movieo.database.MovieDatabaseRepository
+import com.tonyk.android.movieo.database.MovieDatabaseRepositoryImpl
 import com.tonyk.android.movieo.database.migration_1_2
 import dagger.Module
 import dagger.Provides
@@ -35,7 +35,6 @@ object RoomModule {
     @Provides
     @Singleton
     fun provideMovieDatabaseRepository(database: MovieDatabase): MovieDatabaseRepository {
-        return MovieDatabaseRepository(database)
+        return MovieDatabaseRepositoryImpl(database)
     }
-
 }

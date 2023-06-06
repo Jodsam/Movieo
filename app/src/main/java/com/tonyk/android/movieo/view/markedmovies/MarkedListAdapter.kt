@@ -1,4 +1,4 @@
-package com.tonyk.android.movieo.adapters
+package com.tonyk.android.movieo.view.markedmovies
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +8,7 @@ import com.tonyk.android.movieo.databinding.MovieItemBinding
 import com.tonyk.android.movieo.model.Movie
 
 
-class WatchListViewHolder (
+class MarkedListViewHolder (
     private val binding: MovieItemBinding
 ) : RecyclerView.ViewHolder(binding.root){
     fun bind(movie: Movie, onMovieClicked: (imdbID: String) -> Unit) {
@@ -19,19 +19,19 @@ class WatchListViewHolder (
     }
 }
 
-class WatchListAdapter (
+class MarkedListAdapter (
     private val movieList: List<Movie>,
     private val onMovieClicked: (imdbID: String) -> Unit
-) : RecyclerView.Adapter<WatchListViewHolder>(){
+) : RecyclerView.Adapter<MarkedListViewHolder>(){
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): WatchListViewHolder {
+    ): MarkedListViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = MovieItemBinding.inflate(inflater, parent, false)
-        return WatchListViewHolder(binding)
+        return MarkedListViewHolder(binding)
     }
-    override fun onBindViewHolder(holder: WatchListViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MarkedListViewHolder, position: Int) {
         val item = movieList[position]
         holder.bind(item, onMovieClicked)
     }

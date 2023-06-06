@@ -1,4 +1,4 @@
-package com.tonyk.android.movieo.fragments
+package com.tonyk.android.movieo.view.detailsmovie.detaildialogs
 
 
 import android.app.AlertDialog
@@ -11,6 +11,7 @@ import androidx.navigation.fragment.navArgs
 import coil.load
 import com.tonyk.android.movieo.R
 import com.tonyk.android.movieo.databinding.FragmentPosterDialogBinding
+
 
 class PosterDialogFragment: DialogFragment() {
     private var _binding: FragmentPosterDialogBinding? = null

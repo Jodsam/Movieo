@@ -1,8 +1,8 @@
 package com.tonyk.android.movieo.di
 
-import com.tonyk.android.movieo.api.MovieApiService
-import com.tonyk.android.movieo.repositories.FirebaseRepository
-import com.tonyk.android.movieo.repositories.MovieApiRepository
+import com.tonyk.android.movieo.api.MovieApi
+import com.tonyk.android.movieo.api.MovieApiRepository
+import com.tonyk.android.movieo.api.MovieApiRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,26 +14,20 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-
     @Provides
     @Singleton
-    fun provideMovieApi(): MovieApiService {
+    fun provideMovieApi(): MovieApi {
         val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl("https://www.omdbapi.com/")
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
-        return retrofit.create(MovieApiService::class.java)
-    }
-    @Provides
-    @Singleton
-    fun provideMovieApiRepository(movieApi: MovieApiService): MovieApiRepository {
-        return MovieApiRepository(movieApi)
+        return retrofit.create(MovieApi::class.java)
     }
 
     @Provides
     @Singleton
-    fun provideFirebaseRepository(): FirebaseRepository {
-        return FirebaseRepository()
+    fun provideMovieRepository(api: MovieApi): MovieApiRepository {
+        return MovieApiRepositoryImpl(api)
     }
 
 }

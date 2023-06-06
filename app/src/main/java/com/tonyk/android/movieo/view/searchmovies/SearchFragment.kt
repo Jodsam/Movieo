@@ -1,11 +1,9 @@
-package com.tonyk.android.movieo.fragments
+package com.tonyk.android.movieo.view.searchmovies
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
-import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -15,11 +13,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
-import com.tonyk.android.movieo.R
-import com.tonyk.android.movieo.viewmodels.SearchViewModel
-import com.tonyk.android.movieo.adapters.MovieSearchAdapter
 import com.tonyk.android.movieo.databinding.FragmentSearchBinding
+import com.tonyk.android.movieo.viewmodel.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -69,10 +64,8 @@ class SearchFragment : Fragment()  {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query != null && searchViewModel.currentQuery != query) {
                     binding.progressBar.visibility = View.VISIBLE
-                    binding.logoImage.visibility = View.GONE
-                    binding.sloganText.visibility = View.GONE
-                    binding.withText.visibility = View.GONE
-                searchViewModel.setQuery(query) }
+                searchViewModel.setQuery(query)
+                }
                 searchView.clearFocus()
 
                 return false
@@ -94,9 +87,7 @@ class SearchFragment : Fragment()  {
 
     override fun onResume() {
         super.onResume()
-        binding.logoImage.visibility = View.GONE
-        binding.sloganText.visibility = View.GONE
-        binding.withText.visibility = View.GONE
+
     }
     override fun onDestroyView() {
         super.onDestroyView()

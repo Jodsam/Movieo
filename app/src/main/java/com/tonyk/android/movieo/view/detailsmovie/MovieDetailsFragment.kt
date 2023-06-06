@@ -1,4 +1,4 @@
-package com.tonyk.android.movieo.fragments
+package com.tonyk.android.movieo.view.detailsmovie
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -19,7 +19,8 @@ import androidx.navigation.fragment.navArgs
 import coil.load
 import com.tonyk.android.movieo.R
 import com.tonyk.android.movieo.databinding.FragmentMovieDetailsBinding
-import com.tonyk.android.movieo.viewmodels.MovieDetailViewModel
+import com.tonyk.android.movieo.viewmodel.MovieDetailsViewModel
+import com.tonyk.android.movieo.view.detailsmovie.detaildialogs.RatingDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 import kotlinx.coroutines.Dispatchers
@@ -37,7 +38,7 @@ class MovieDetailsFragment : Fragment() {
         }
 
     private val args: MovieDetailsFragmentArgs by navArgs()
-    private val movieDetailViewModel: MovieDetailViewModel by viewModels()
+    private val movieDetailsViewModel: MovieDetailsViewModel by viewModels()
 
 
     override fun onCreateView(
@@ -56,41 +57,41 @@ class MovieDetailsFragment : Fragment() {
 
         setFragmentResultListener(RatingDialogFragment.REQUEST_RATING) { _, bundle ->
             val myratings = bundle.getFloat("rating")
-            movieDetailViewModel.myratings = (myratings*2).toString()
+            movieDetailsViewModel.myratings = (myratings*2).toString()
             viewLifecycleOwner.lifecycleScope.launch {
-            movieDetailViewModel.updateMovieRating(args.movieID, myratings) }
+            movieDetailsViewModel.updateMovieRating(args.movieID, myratings) }
             binding.showRatings.visibility = View.VISIBLE
-            binding.showRatings.text = getString(R.string.your_rating, movieDetailViewModel.myratings)
+            binding.showRatings.text = getString(R.string.your_rating, movieDetailsViewModel.myratings)
         }
 
             viewLifecycleOwner.lifecycleScope.launch {
                 viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                    movieDetailViewModel.getInfo(args.movieID)
-                    movieDetailViewModel.movieDetails.collect {
-                        withContext(Dispatchers.Main) {
+                    movieDetailsViewModel.getInfo(args.movieID)
+                    movieDetailsViewModel.movieDetails.collect {
 
-                            binding.movieTitleD.text = it.title
-                            if (it.Poster.length == 3) binding.moviePoster.load(R.drawable.noposter)
-                            else binding.moviePoster.load(it.Poster)
-                            binding.plot.text = getString(R.string.plot, it.plot)
-                            binding.country.text = getString(R.string.country, it.Country)
-                            binding.language.text = getString(R.string.language, it.Language)
-                            binding.date.text = getString(R.string.release_date, it.date)
-                            binding.time.text = getString(R.string.runtime, it.runtime)
+                            binding.apply {
+                            movieTitleD.text = it.title
+                            if (it.Poster.length == 3) moviePoster.load(R.drawable.noposter)
+                            else moviePoster.load(it.Poster)
+                            plot.text = getString(R.string.plot, it.plot)
+                            country.text = getString(R.string.country, it.Country)
+                            language.text = getString(R.string.language, it.Language)
+                            date.text = getString(R.string.release_date, it.date)
+                            time.text = getString(R.string.runtime, it.runtime)
                             val ratings = it.Ratings
                             if (ratings.isNotEmpty()) {
                                 val firstRating = ratings[0]
-                                binding.rating.text =
+                                rating.text =
                                     getString(R.string.ratings, firstRating.rating)
-                            } else binding.rating.text = getString(R.string.ratings, "N/A")
-                            binding.actors.text = getString(R.string.actors_with_label, it.Actors)
-                            binding.genre.text = getString(R.string.genre, it.Genre)
-                            binding.director.text = getString(R.string.director, it.Director)
+                            } else rating.text = getString(R.string.ratings, "N/A")
+                            actors.text = getString(R.string.actors_with_label, it.Actors)
+                            genre.text = getString(R.string.genre, it.Genre)
+                            director.text = getString(R.string.director, it.Director)
 
-                            if (movieDetailViewModel.myratings != "N/A") {
-                                binding.showRatings.visibility = View.VISIBLE
-                                binding.showRatings.text =
-                                    getString(R.string.your_rating, movieDetailViewModel.myratings)
+                            if (movieDetailsViewModel.myratings != "N/A") {
+                                showRatings.visibility = View.VISIBLE
+                                showRatings.text =
+                                    getString(R.string.your_rating, movieDetailsViewModel.myratings)
                             }
                             setButtonState()
                         }
@@ -98,27 +99,31 @@ class MovieDetailsFragment : Fragment() {
                 }
             }
         binding.moviePoster.setOnClickListener {
-            findNavController().navigate(MovieDetailsFragmentDirections.checkPoster(movieDetailViewModel.movieDetails.value.Poster))
+            findNavController().navigate(
+                MovieDetailsFragmentDirections.checkPoster(
+                    movieDetailsViewModel.movieDetails.value.Poster
+                )
+            )
         }
 
         binding.rateMovieButton.setOnClickListener {
             findNavController().navigate(MovieDetailsFragmentDirections.rateMovie()) }
 
         binding.sawMovieButton.setOnClickListener {
-                if (movieDetailViewModel.isDataLoaded) {
+                if (movieDetailsViewModel.isDataLoaded) {
                 viewLifecycleOwner.lifecycleScope.launch {
-                    movieDetailViewModel.addMovie(args.movieID, false, true)
+                    movieDetailsViewModel.addMovie(args.movieID, false, true)
                     setButtonState()
-                    Toast.makeText(context, if (movieDetailViewModel.alreadySaw) "Marked As Watched" else "Marked As Not Watched", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, if (movieDetailsViewModel.alreadySaw) "Marked As Watched" else "Marked As Not Watched", Toast.LENGTH_SHORT).show()
                      }
                 }
         }
         binding.saveMovieButton.setOnClickListener {
-            if (movieDetailViewModel.isDataLoaded) {
+            if (movieDetailsViewModel.isDataLoaded) {
                 viewLifecycleOwner.lifecycleScope.launch {
-                    movieDetailViewModel.addMovie(args.movieID, true, false)
+                    movieDetailsViewModel.addMovie(args.movieID, true, false)
                     setButtonState()
-                    Toast.makeText(context, if (movieDetailViewModel.isAddedToWatchLists) "Added To WatchList" else "Removed From WatchList", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, if (movieDetailsViewModel.isAddedToWatchLists) "Added To WatchList" else "Removed From WatchList", Toast.LENGTH_SHORT).show()
                     }
                 }
         }
@@ -138,12 +143,12 @@ class MovieDetailsFragment : Fragment() {
     private fun setButtonState() {
         val context = requireContext()
 
-        val sawButtonTextRes = if (movieDetailViewModel.alreadySaw) R.string.watched_mark else R.string.not_watched_mark
+        val sawButtonTextRes = if (movieDetailsViewModel.alreadySaw) R.string.watched_mark else R.string.not_watched_mark
         binding.sawMovieButton.setText(sawButtonTextRes)
-        binding.sawMovieButton.setTextColor(ContextCompat.getColor(context, if (movieDetailViewModel.alreadySaw) R.color.green else R.color.yellow))
+        binding.sawMovieButton.setTextColor(ContextCompat.getColor(context, if (movieDetailsViewModel.alreadySaw) R.color.green else R.color.yellow))
 
-        val saveButtonTextRes = if (movieDetailViewModel.isAddedToWatchLists) R.string.added_to_watchlist else R.string.add_watchlist
+        val saveButtonTextRes = if (movieDetailsViewModel.isAddedToWatchLists) R.string.added_to_watchlist else R.string.add_watchlist
         binding.saveMovieButton.setText(saveButtonTextRes)
-        binding.saveMovieButton.setTextColor(ContextCompat.getColor(context, if (movieDetailViewModel.isAddedToWatchLists) R.color.green else R.color.yellow))
+        binding.saveMovieButton.setTextColor(ContextCompat.getColor(context, if (movieDetailsViewModel.isAddedToWatchLists) R.color.green else R.color.yellow))
     }
 }
