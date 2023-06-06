@@ -8,7 +8,7 @@ import com.tonyk.android.movieo.api.RatingsResponse
 
 @Entity
 @JsonClass(generateAdapter = true)
-data class MovieDetailItem(
+data class MovieDetailsItem(
     @Json(name = "Title") val title: String,
     @Json(name = "Released") val date: String,
     @Json(name = "Runtime") val runtime: String,

@@ -1,4 +1,4 @@
-package com.tonyk.android.movieo.fragments
+package com.tonyk.android.movieo.view.mainpage
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,9 +14,8 @@ import androidx.viewpager2.widget.ViewPager2
 import coil.load
 import com.google.android.material.tabs.TabLayoutMediator
 import com.tonyk.android.movieo.R
-import com.tonyk.android.movieo.adapters.VpAdapter
 import com.tonyk.android.movieo.databinding.FragmentMainPageBinding
-import com.tonyk.android.movieo.viewmodels.MainPageViewModel
+import com.tonyk.android.movieo.viewmodel.MainPageViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -61,13 +60,21 @@ class MainPageFragment : Fragment()  {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 mainpageViewModel.featuredMovie.collect  {movie ->
                     if (movie != null) {
-                        binding.mainTitle.text = movie.title
-                        binding.mainDate.text = movie.date
-                        binding.mainPlot.text = movie.plot
-                        binding.mainPoster.load(movie.Poster)
-                        binding.mainPoster.setOnClickListener {
-                            findNavController().navigate(MainPageFragmentDirections.mainToDetails(movie.imdbID))
+
+                        binding.apply {
+                        mainTitle.text = movie.title
+                        mainDate.text = movie.date
+                        mainPlot.text = movie.plot
+                        mainPoster.load(movie.Poster)
+                        mainPoster.setOnClickListener {
+                            findNavController().navigate(
+                                MainPageFragmentDirections.mainToDetails(
+                                    movie.imdbID
+                                )
+                            )
                         }
+                    }
+
                     }
                 }
             }

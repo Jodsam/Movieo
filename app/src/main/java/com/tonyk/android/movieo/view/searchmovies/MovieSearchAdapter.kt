@@ -1,4 +1,4 @@
-package com.tonyk.android.movieo.adapters
+package com.tonyk.android.movieo.view.searchmovies
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,24 +9,25 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.tonyk.android.movieo.R
 import com.tonyk.android.movieo.databinding.MovieItemBinding
-import com.tonyk.android.movieo.fragments.SearchFragmentDirections
+
 import com.tonyk.android.movieo.model.MovieListItem
 
 class MovieSearchViewHolder(private val binding: MovieItemBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(movieListItem: MovieListItem, navController: NavController) {
-        val log = movieListItem.posterUrl.length
-        if (log == 3) binding.recImage.load(R.drawable.noposter)
-        else binding.recImage.load(movieListItem.posterUrl)
-        binding.movieTitle.text = movieListItem.title
-        binding.movieType.text = movieListItem.type
-        binding.movieYear.text = movieListItem.year
-        binding.root.setOnClickListener {
-            val action = SearchFragmentDirections.searchFragmentToDetailsFragment(movieListItem.imdbId)
+        binding.apply {
+        if (movieListItem.posterUrl.length == 3) recImage.load(R.drawable.noposter)
+        else recImage.load(movieListItem.posterUrl)
+        movieTitle.text = movieListItem.title
+        movieType.text = movieListItem.type
+        movieYear.text = movieListItem.year
+        root.setOnClickListener {
+            val action =
+                SearchFragmentDirections.searchFragmentToDetailsFragment(movieListItem.imdbId)
             navController.navigate(action)
         }
-
+        }
     }
 }
 

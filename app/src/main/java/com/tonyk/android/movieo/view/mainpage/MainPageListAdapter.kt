@@ -1,4 +1,4 @@
-package com.tonyk.android.movieo.adapters
+package com.tonyk.android.movieo.view.mainpage
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,12 +7,12 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.tonyk.android.movieo.databinding.MainPageMovieItemBinding
-import com.tonyk.android.movieo.model.MovieDetailItem
+import com.tonyk.android.movieo.model.MovieDetailsItem
 
 class MainListViewHolder(private val binding: MainPageMovieItemBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(movie: MovieDetailItem, onMovieClicked: (imdbID: String) -> Unit) {
+    fun bind(movie: MovieDetailsItem, onMovieClicked: (imdbID: String) -> Unit) {
         binding.movieTitleMain.text = movie.title
         binding.moviePosterMain.load(movie.Poster)
         binding.root.setOnClickListener { onMovieClicked(movie.imdbID) }
@@ -21,7 +21,7 @@ class MainListViewHolder(private val binding: MainPageMovieItemBinding) :
 
 class MainListAdapter(
     private val onMovieClicked: (imdbID: String) -> Unit
-) : ListAdapter<MovieDetailItem, MainListViewHolder>(MovieDiffCallback()) {
+) : ListAdapter<MovieDetailsItem, MainListViewHolder>(MovieDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainListViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -35,12 +35,12 @@ class MainListAdapter(
     }
 }
 
-class MovieDiffCallback : DiffUtil.ItemCallback<MovieDetailItem>() {
-    override fun areItemsTheSame(oldItem: MovieDetailItem, newItem: MovieDetailItem): Boolean {
+class MovieDiffCallback : DiffUtil.ItemCallback<MovieDetailsItem>() {
+    override fun areItemsTheSame(oldItem: MovieDetailsItem, newItem: MovieDetailsItem): Boolean {
         return oldItem.imdbID == newItem.imdbID
     }
 
-    override fun areContentsTheSame(oldItem: MovieDetailItem, newItem: MovieDetailItem): Boolean {
+    override fun areContentsTheSame(oldItem: MovieDetailsItem, newItem: MovieDetailsItem): Boolean {
         return oldItem == newItem
     }
 }

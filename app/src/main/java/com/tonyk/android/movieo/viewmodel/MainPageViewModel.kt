@@ -1,10 +1,10 @@
-package com.tonyk.android.movieo.viewmodels
+package com.tonyk.android.movieo.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tonyk.android.movieo.repositories.MovieApiRepository
-import com.tonyk.android.movieo.model.MovieDetailItem
-import com.tonyk.android.movieo.repositories.FirebaseRepository
+import com.tonyk.android.movieo.api.MovieApiRepository
+import com.tonyk.android.movieo.model.MovieDetailsItem
+import com.tonyk.android.movieo.firebase.FirebaseRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,27 +14,27 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class MainPageViewModel @Inject constructor(private val movieApiRepository: MovieApiRepository, private val firebaseRepository: FirebaseRepository)  : ViewModel() {
+class MainPageViewModel @Inject constructor(private val movieApi: MovieApiRepository, private val firebaseRepository: FirebaseRepository)  : ViewModel() {
 
 
-    private val _movies: MutableStateFlow<List<MovieDetailItem>> = MutableStateFlow(emptyList())
-    val movies: StateFlow<List<MovieDetailItem>> = _movies
+    private val _movies: MutableStateFlow<List<MovieDetailsItem>> = MutableStateFlow(emptyList())
+    val movies: StateFlow<List<MovieDetailsItem>> = _movies
 
-    private val _newmovies: MutableStateFlow<List<MovieDetailItem>> = MutableStateFlow(emptyList())
-    val newmovies: StateFlow<List<MovieDetailItem>> = _newmovies
+    private val _newmovies: MutableStateFlow<List<MovieDetailsItem>> = MutableStateFlow(emptyList())
+    val newmovies: StateFlow<List<MovieDetailsItem>> = _newmovies
 
-    private val _featuredMovie = MutableStateFlow<MovieDetailItem?>(null)
-    val featuredMovie: StateFlow<MovieDetailItem?> = _featuredMovie
+    private val _featuredMovie = MutableStateFlow<MovieDetailsItem?>(null)
+    val featuredMovie: StateFlow<MovieDetailsItem?> = _featuredMovie
 
     fun loadMovies() {
         viewModelScope.launch {
             val imdbIds = firebaseRepository.getMoviesFromFirebase()
 
             imdbIds.collectLatest { ids ->
-                val movieList = mutableListOf<MovieDetailItem>()
+                val movieList = mutableListOf<MovieDetailsItem>()
 
                 ids.forEach { imdbId ->
-                    val movie = movieApiRepository.searchDetails(imdbId)
+                    val movie = movieApi.searchDetails(imdbId)
                     if (movie != null) {
                         movieList.add(movie)
                     }
@@ -49,9 +49,9 @@ class MainPageViewModel @Inject constructor(private val movieApiRepository: Movi
             val imdbIds = firebaseRepository.getNewMoviesFromFirebase()
 
             imdbIds.collectLatest { ids ->
-                val movieList = mutableListOf<MovieDetailItem>()
+                val movieList = mutableListOf<MovieDetailsItem>()
                 ids.forEach { imdbId ->
-                    val movie = movieApiRepository.searchDetails(imdbId)
+                    val movie = movieApi.searchDetails(imdbId)
                     if (movie != null) {
                         movieList.add(movie)
                     }
@@ -65,7 +65,7 @@ class MainPageViewModel @Inject constructor(private val movieApiRepository: Movi
         viewModelScope.launch {
              val imdbID = firebaseRepository.getFeaturedMovieFromFirebase()
             imdbID.collect {
-                _featuredMovie.value = it?.let { it1 -> movieApiRepository.searchDetails(it1) }
+                _featuredMovie.value = it?.let { it1 -> movieApi.searchDetails(it1) }
             }
         }
     }

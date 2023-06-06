@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/MainPageFragment"
-        android:name="com.tonyk.android.movieo.fragments.MainPageFragment"
+        android:name="com.tonyk.android.movieo.view.mainpage.MainPageFragment"
         android:label="SavedMoviesFragment">
         <action
             android:id="@+id/main_to_search"
@@ -24,7 +24,7 @@
 
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.tonyk.android.movieo.fragments.SearchFragment"
+        android:name="com.tonyk.android.movieo.view.searchmovies.SearchFragment"
         android:label="SearchFragment" >
         <action
             android:id="@+id/searchFragment_to_DetailsFragment"
@@ -32,7 +32,7 @@
     </fragment>
     <fragment
         android:id="@+id/MovieDetailsFragment"
-        android:name="com.tonyk.android.movieo.fragments.MovieDetailsFragment"
+        android:name="com.tonyk.android.movieo.view.detailsmovie.MovieDetailsFragment"
         android:label="RecipeDetailsFragment" >
         <argument
             android:name="movieID"
@@ -46,7 +46,7 @@
     </fragment>
     <dialog
         android:id="@+id/posterDialogFragment"
-        android:name="com.tonyk.android.movieo.fragments.PosterDialogFragment"
+        android:name="com.tonyk.android.movieo.view.detailsmovie.detaildialogs.PosterDialogFragment"
         android:label="PosterDialogFragment" >
         <argument
             android:name="posterLink"
@@ -54,11 +54,11 @@
     </dialog>
     <dialog
         android:id="@+id/ratingDialogFragment"
-        android:name="com.tonyk.android.movieo.fragments.RatingDialogFragment"
+        android:name="com.tonyk.android.movieo.view.detailsmovie.detaildialogs.RatingDialogFragment"
         android:label="RatingDialogFragment" />
     <fragment
         android:id="@+id/watchListFragment"
-        android:name="com.tonyk.android.movieo.fragments.WatchListFragment"
+        android:name="com.tonyk.android.movieo.view.markedmovies.watchlistedmovies.WatchListFragment"
         android:label="WatchListFragment" >
         <action
             android:id="@+id/action_watchListFragment_to_MovieDetailsFragment"
@@ -66,7 +66,7 @@
     </fragment>
     <fragment
         android:id="@+id/watchedListFragment"
-        android:name="com.tonyk.android.movieo.fragments.WatchedListFragment"
+        android:name="com.tonyk.android.movieo.view.markedmovies.watchedmovies.WatchedListFragment"
         android:label="WatchedListFragment" >
         <action
             android:id="@+id/action_watchedListFragment_to_MovieDetailsFragment"

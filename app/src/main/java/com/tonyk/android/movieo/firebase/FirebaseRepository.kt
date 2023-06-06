@@ -1,4 +1,4 @@
-package com.tonyk.android.movieo.repositories
+package com.tonyk.android.movieo.firebase
 
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -9,8 +9,11 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import javax.inject.Inject
+import javax.inject.Singleton
 
-class FirebaseRepository {
+
+@Singleton
+class FirebaseRepository @Inject constructor(){
 
     private val database = Firebase.database.reference
     fun getMoviesFromFirebase(): Flow<List<String>> = callbackFlow {

@@ -1,9 +1,9 @@
-package com.tonyk.android.movieo.viewmodels
+package com.tonyk.android.movieo.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tonyk.android.movieo.repositories.MovieApiRepository
+import com.tonyk.android.movieo.api.MovieApiRepository
 import com.tonyk.android.movieo.model.MovieListItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -16,7 +16,7 @@ import retrofit2.HttpException
 import javax.inject.Inject
 
 @HiltViewModel
-class SearchViewModel  @Inject constructor(private val movieApiRepository: MovieApiRepository) : ViewModel() {
+class SearchViewModel  @Inject constructor(private val movieApi: MovieApiRepository) : ViewModel() {
 
     private var _movieListItems: MutableStateFlow<List<MovieListItem>> =
         MutableStateFlow(emptyList())
@@ -48,9 +48,9 @@ class SearchViewModel  @Inject constructor(private val movieApiRepository: Movie
     private suspend fun searchMovieItems(query: String, page: Int): List<MovieListItem> {
         return try {
             if (query.isNotEmpty()) {
-                movieApiRepository.searchMovies(query, page)
+                movieApi.searchMovies(query, page)
             } else {
-                movieApiRepository.searchMovies("", page)
+                movieApi.searchMovies("", page)
             }
         } catch (e: HttpException) {
             Log.e("HttpError", "Failed to search for recipe items", e)

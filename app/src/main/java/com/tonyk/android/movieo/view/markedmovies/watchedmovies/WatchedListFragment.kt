@@ -1,4 +1,4 @@
-package com.tonyk.android.movieo.fragments
+package com.tonyk.android.movieo.view.markedmovies.watchedmovies
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,16 +11,16 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.tonyk.android.movieo.adapters.WatchListAdapter
+import com.tonyk.android.movieo.view.markedmovies.MarkedListAdapter
 import com.tonyk.android.movieo.databinding.FragmentWatchedListBinding
-import com.tonyk.android.movieo.viewmodels.MyListViewModel
+import com.tonyk.android.movieo.viewmodel.MarkedListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
 class WatchedListFragment: Fragment() {
-    private val myListViewModel: MyListViewModel by viewModels()
+    private val markedListViewModel: MarkedListViewModel by viewModels()
     private var _binding: FragmentWatchedListBinding? = null
     private val binding
         get() = checkNotNull(_binding) {
@@ -45,10 +45,14 @@ class WatchedListFragment: Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                myListViewModel.movies.collect {movies ->
+                markedListViewModel.movies.collect { movies ->
                     val watchListMovies = movies.filter { it.isWatched }
-                    binding.rcvWatched.adapter = WatchListAdapter(watchListMovies) { imdbID ->
-                        findNavController().navigate(WatchedListFragmentDirections.actionWatchedListFragmentToMovieDetailsFragment(imdbID)) }
+                    binding.rcvWatched.adapter = MarkedListAdapter(watchListMovies) { imdbID ->
+                        findNavController().navigate(
+                            WatchedListFragmentDirections.actionWatchedListFragmentToMovieDetailsFragment(
+                                imdbID
+                            )
+                        ) }
                 }
             }
         }

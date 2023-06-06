@@ -1,4 +1,4 @@
-package com.tonyk.android.movieo.fragments
+package com.tonyk.android.movieo.view.detailsmovie.detaildialogs
 
 import android.content.Context
 import android.os.Build
