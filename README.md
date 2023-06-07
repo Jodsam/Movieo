@@ -28,6 +28,7 @@ Movieo is a project that allows users to discover and explore movies. It provide
 - XML: Markup language for designing the user interface in Android.
 - Git: Version control system for tracking changes in the project.
 - GitHub: Hosting platform for the Git repository.
+- API: https://www.omdbapi.com/
 
 
 ## Contact
