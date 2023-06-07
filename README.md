@@ -1,8 +1,13 @@
+![](https://cdn.discordapp.com/attachments/327804857501351937/1115945924859019326/logosito.png)
+
 # Movieo
 
-![]([https://pasteboard.co/VI7x7rjEznrP.png](https://pasteboard.co/oODX2Hm8Rj27.jpg))
-
 Movieo is a project that allows users to discover and explore movies. It provides information about various movies, including their title, genre, release date, and ratings. Users can search for movies, view details about them, and save their favorite movies for future reference.
+
+
+
+<img src="https://cdn.discordapp.com/attachments/327804857501351937/1115947263563407380/55.png" width="25%" height="25%"> <img src="https://cdn.discordapp.com/attachments/327804857501351937/1115947263173333012/44.png" width="25%" height="25%"> <img src="https://cdn.discordapp.com/attachments/327804857501351937/1115947890699948052/66.png" width="25%" height="25%">
+
 
 ## Features
 
