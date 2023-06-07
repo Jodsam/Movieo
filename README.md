@@ -1,6 +1,6 @@
 # Movieo
 
-![Logo]([https://pasteboard.co/VI7x7rjEznrP.png](https://pasteboard.co/oODX2Hm8Rj27.jpg))
+![]([https://pasteboard.co/VI7x7rjEznrP.png](https://pasteboard.co/oODX2Hm8Rj27.jpg))
 
 Movieo is a project that allows users to discover and explore movies. It provides information about various movies, including their title, genre, release date, and ratings. Users can search for movies, view details about them, and save their favorite movies for future reference.
 
