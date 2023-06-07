@@ -23,9 +23,7 @@ import com.tonyk.android.movieo.viewmodel.MovieDetailsViewModel
 import com.tonyk.android.movieo.view.detailsmovie.detaildialogs.RatingDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 
 @AndroidEntryPoint
@@ -55,6 +53,7 @@ class MovieDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         setFragmentResultListener(RatingDialogFragment.REQUEST_RATING) { _, bundle ->
             val myratings = bundle.getFloat("rating")
             movieDetailsViewModel.myratings = (myratings*2).toString()
@@ -71,8 +70,15 @@ class MovieDetailsFragment : Fragment() {
 
                             binding.apply {
                             movieTitleD.text = it.title
-                            if (it.Poster.length == 3) moviePoster.load(R.drawable.noposter)
-                            else moviePoster.load(it.Poster)
+                            if (it.Poster.length == 3) { binding.moviePoster.load(R.drawable.noposter)
+                                pbarPoster.visibility = View.GONE
+                                moviePoster.isClickable = false  }
+
+                            else {moviePoster.load(it.Poster) {
+                                listener(
+                                    onSuccess = { _, _ ->  pbarPoster.visibility = View.GONE  }
+                                ) } }
+
                             plot.text = getString(R.string.plot, it.plot)
                             country.text = getString(R.string.country, it.Country)
                             language.text = getString(R.string.language, it.Language)
@@ -94,24 +100,29 @@ class MovieDetailsFragment : Fragment() {
                                     getString(R.string.your_rating, movieDetailsViewModel.myratings)
                             }
                             setButtonState()
+
+
                         }
                     }
                 }
             }
         binding.moviePoster.setOnClickListener {
+            if (movieDetailsViewModel.isDataLoaded) {
             findNavController().navigate(
                 MovieDetailsFragmentDirections.checkPoster(
                     movieDetailsViewModel.movieDetails.value.Poster
                 )
-            )
+            )}
         }
 
         binding.rateMovieButton.setOnClickListener {
-            findNavController().navigate(MovieDetailsFragmentDirections.rateMovie()) }
+            if (movieDetailsViewModel.isDataLoaded) {
+            findNavController().navigate(MovieDetailsFragmentDirections.rateMovie()) } }
 
         binding.sawMovieButton.setOnClickListener {
                 if (movieDetailsViewModel.isDataLoaded) {
                 viewLifecycleOwner.lifecycleScope.launch {
+
                     movieDetailsViewModel.addMovie(args.movieID, false, true)
                     setButtonState()
                     Toast.makeText(context, if (movieDetailsViewModel.alreadySaw) "Marked As Watched" else "Marked As Not Watched", Toast.LENGTH_SHORT).show()
@@ -134,6 +145,8 @@ class MovieDetailsFragment : Fragment() {
                 getString(R.string.share_movie,args.movieID)  )
         }
             startActivity(shareIntent) }
+
+
 
     }
     override fun onDestroyView() {

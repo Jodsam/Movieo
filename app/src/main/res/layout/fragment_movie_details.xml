@@ -86,6 +86,7 @@
                 android:layout_height="300dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/my_gradient_two"
+                android:clickable="true"
                 android:padding="12dp"
                 android:scaleType="fitCenter"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -234,6 +235,17 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/rating"
                 app:srcCompat="@drawable/movie_rate" />
+
+            <ProgressBar
+                android:id="@+id/pbar_poster"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@+id/movie_poster"
+                app:layout_constraintEnd_toEndOf="@+id/movie_poster"
+                app:layout_constraintStart_toStartOf="@+id/movie_poster"
+                app:layout_constraintTop_toTopOf="@+id/movie_poster" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
