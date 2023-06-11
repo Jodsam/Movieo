@@ -1,11 +1,10 @@
+package com.tonyk.android.movieo
+
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
 
 class AuthenticationViewModel : ViewModel() {
     private val _authenticationState: MutableStateFlow<AuthenticationState> =
