@@ -15,7 +15,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "1094677475889-d5jja6euhjs1m7vqoafr15okfih7f2j4.apps.googleusercontent.com",
+          "client_id": "1094677475889-r0q08c16s1po0gfd12d08oodgf0k60il.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tonyk.android.movieo",
+            "certificate_hash": "0476c07ad659c869417685092816daf79c8e7f4b"
+          }
+        },
+        {
+          "client_id": "1094677475889-2ig92slrasj1kcurm420umdm639m4vu4.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -28,7 +36,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1094677475889-d5jja6euhjs1m7vqoafr15okfih7f2j4.apps.googleusercontent.com",
+              "client_id": "1094677475889-2ig92slrasj1kcurm420umdm639m4vu4.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

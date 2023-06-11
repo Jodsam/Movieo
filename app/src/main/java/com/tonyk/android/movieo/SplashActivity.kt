@@ -1,5 +1,6 @@
 package com.tonyk.android.movieo
 
+
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
@@ -16,7 +17,7 @@ class SplashActivity : AppCompatActivity() {
 
 
         Handler().postDelayed({
-            val intent = Intent(this@SplashActivity, MainActivity::class.java)
+            val intent = Intent(this@SplashActivity, LoginActivity::class.java)
             startActivity(intent)
             finish()
         }, SPLASH_DELAY)
