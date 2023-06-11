@@ -121,7 +121,9 @@ class MovieDetailsFragment : Fragment() {
 
         binding.rateMovieButton.setOnClickListener {
             if (movieDetailsViewModel.isDataLoaded) {
-            findNavController().navigate(MovieDetailsFragmentDirections.rateMovie()) } }
+                val currentDestination = findNavController().currentDestination
+                if (currentDestination?.id == R.id.MovieDetailsFragment) {
+                    findNavController().navigate(MovieDetailsFragmentDirections.rateMovie()) } } }
 
         binding.sawMovieButton.setOnClickListener {
                 if (movieDetailsViewModel.isDataLoaded) {
