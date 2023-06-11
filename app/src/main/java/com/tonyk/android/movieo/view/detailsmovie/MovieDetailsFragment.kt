@@ -108,11 +108,15 @@ class MovieDetailsFragment : Fragment() {
             }
         binding.moviePoster.setOnClickListener {
             if (movieDetailsViewModel.isDataLoaded) {
-            findNavController().navigate(
-                MovieDetailsFragmentDirections.checkPoster(
-                    movieDetailsViewModel.movieDetails.value.Poster
-                )
-            )}
+                val currentDestination = findNavController().currentDestination
+                if (currentDestination?.id == R.id.MovieDetailsFragment) {
+                    findNavController().navigate(
+                        MovieDetailsFragmentDirections.checkPoster(
+                            movieDetailsViewModel.movieDetails.value.Poster
+                        )
+                    )
+                }
+            }
         }
 
         binding.rateMovieButton.setOnClickListener {
